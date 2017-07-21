@@ -1,10 +1,45 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="collapse navbar-collapse navbar-ex1-collapse">
+               <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{url('/home')}}">Admin</a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Admin <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+
+
+                        <li class="divider"></li>
+                        <li>
+                            <a href="{{ url('/logout') }}" 
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="{{route('rumah.index')}}"><i class="fa fa-fw fa-dashboard"></i> Rumah</a>
+                        <a href="{{url('/rumah')}}"><i class="fa fa-fw fa-dashboard"></i> Rumah</a>
                     </li>
                     <li>
                         <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Agen</a>
@@ -15,19 +50,35 @@
                     
                 </ul>
             </div>
-            <div class="col-md-10 col-md-offset-2">
-            	<div class="well">
-            	<div class="panel panel-primary">
-				<div class="panel-heading">
-					<h2 class="panel-title">Rumah</h2>
-				</div>
-				<div class="panel-body">
-					<p><a class="btn btn-primary" href="{{ route('rumah.create') }}">Tambah</a></p>
-					
-				</div>
-			</div>
-            	</div>
-            </div>
             <!-- /.navbar-collapse -->
+        </nav>
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <a href="{{ url('/rumah/create')}}" class="btn btn-primary">Tambah Rumah</a>
+                        
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                
+                <!-- /.row -->
+
+                
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
 @endsection
         

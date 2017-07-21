@@ -9,19 +9,19 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin </title>
+    <title>Pemasaran Rumah </title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="a/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('a/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="a/css/sb-admin.css" rel="stylesheet">
+    <link href="{{ asset('a/css/sb-admin.css') }}" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link href="a/css/plugins/morris.css" rel="stylesheet">
+    <link href="{{ asset('a/css/plugins/morris.css') }}" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="a/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ asset('a/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -46,8 +46,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Admin</a>
+                
             </div>
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- Authentication Links -->
+                        @if (Auth::guest())
+                            <li><a href="{{ url('/login') }}">Login</a></li>
+                            <li><a href="{{ url('/register') }}">Daftar</a></li>
+                        @endif
+                    </ul>
+                </div>
             <!-- Top Menu Items -->
             
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
@@ -64,12 +74,12 @@
     <script src="a/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="a/js/bootstrap.min.js"></script>
+    <script src="{{ asset('a/js/bootstrap.min.js') }}"></script>
 
     <!-- Morris Charts JavaScript -->
-    <script src="a/js/plugins/morris/raphael.min.js"></script>
-    <script src="a/js/plugins/morris/morris.min.js"></script>
-    <script src="a/js/plugins/morris/morris-data.js"></script>
+    <script src="{{ asset('a/js/plugins/morris/raphael.min.js') }}"></script>
+    <script src="{{ asset('a/js/plugins/morris/morris.min.js') }}"></script>
+    <script src="{{ asset('a/js/plugins/morris/morris-data.js') }}"></script>
 
 </body>
 
