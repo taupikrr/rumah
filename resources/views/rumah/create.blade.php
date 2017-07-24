@@ -66,7 +66,8 @@
                         </h1>
                         <div class="form-group">
                             <label>Keterangan Rumah</label>
-                            <input type="textarea" name="tipe" class="form-control">
+                            <textarea class="form-control"></textarea>
+                            
                         </div>
                         <div class="form-group">
                             <label>Foto Rumah</label>
