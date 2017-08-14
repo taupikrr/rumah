@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\agen;
 use app\rumah;
 use Yajra\Datatables\Html\Builder;
 use Yajra\Datatables\Datatables;
@@ -31,7 +32,8 @@ class rumahController extends Controller
      */
     public function create()
     {
-         return view('rumah.create');
+        $agen = agen::all();
+         return view('rumah.create', compact('agen'));
     }
 
     /**
@@ -44,7 +46,8 @@ class rumahController extends Controller
     {
         //
         $this->validate($request, [
-            'ket'=>'required|unique:rumah,ket',
+            'ket'=>'required',
+            'agen_id'=>'required',
             'foto'=>'image|max:2048']);
         $rumah = rumah::create($request->except('foto'));
         if($request->hasFile('foto'))

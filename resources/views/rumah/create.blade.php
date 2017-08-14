@@ -31,7 +31,6 @@
                             document.getElementById('logout-form').submit();"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
-                            </form>
                         </li>
                     </ul>
                 </li>
@@ -65,6 +64,15 @@
                             Tambah Rumah Baru                      
                         </h1>
                         <div class="form-group">
+                            <label>Nama Agen</label>
+                            <select class="form-control" name="agen_id">
+                                @foreach($agen as $data)
+                                <option>{{$data->nama}}</option>
+                                @endforeach
+                            </select> 
+                            
+                        </div>
+                        <div class="form-group">
                             <label>Keterangan Rumah</label>
                             <textarea class="form-control"></textarea>
                             
@@ -76,6 +84,7 @@
                         <div class="form-group" align="right">
                             <input type="submit" name="simpan" value="Simpan" class="btn btn-primary">
                         </div>
+                        </form>
                     </div>
                 </div>
                 <!-- /.row -->
