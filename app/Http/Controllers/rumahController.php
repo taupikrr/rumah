@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\agen;
-use app\rumah;
+use App\rumah;
 use Yajra\Datatables\Html\Builder;
 use Yajra\Datatables\Datatables;
 use Session;
@@ -22,7 +22,8 @@ class rumahController extends Controller
     public function index()
     {
         //
-        return view('rumah.index');
+         $rumah = rumah::all();
+        return view('rumah.index',compact('rumah'));
     }
 
     /**
@@ -32,8 +33,7 @@ class rumahController extends Controller
      */
     public function create()
     {
-        $agen = agen::all();
-         return view('rumah.create', compact('agen'));
+         return view('rumah.create');
     }
 
     /**
@@ -45,25 +45,23 @@ class rumahController extends Controller
     public function store(Request $request)
     {
         //
-        $this->validate($request, [
-            'ket'=>'required',
-            'agen_id'=>'required',
-            'foto'=>'image|max:2048']);
-        $rumah = rumah::create($request->except('foto'));
+        $rumah = new rumah;
+        $rumah->ket= $request->a;
+        $rumah->agen_id=$request->b;
+        
         if($request->hasFile('foto'))
         {
-            $uploaded_foto=$request->file('foto');
-            $extension=$uploaded_foto->getClientOriginalExtension();
-            $filename=md5(time()).'.'.$extension;
-            $destinationPath=public_path().DIRECTORY_SEPARATOR.'img';
-            $uploaded_foto->move($destinationPath, $filename);
+            $rumahs = $request->file('foto');
+            $extension=$rumahs->getClientOriginalExtension();
+            $filename=str_random(6).'.'.$extension;
+            $destinationPath=public_path().
+            DIRECTORY_SEPARATOR.'img';
+            $rumahs->move($destinationPath, $filename);
             $rumah->foto=$filename;
-            $rumah->save();
+            
         }
-        Session::flash("flash_notification", [
-            "level"=>"success",
-            "message"=>"Berhasil Menyimpan $rumah->ket"]);
-        return redirect()->route('rumah.index');
+        $rumah->save();
+        return redirect('/rumah/');
     }
 
     /**
@@ -86,6 +84,8 @@ class rumahController extends Controller
     public function edit($id)
     {
         //
+        $rumah=rumah::findOrFail($id);
+        return view('rumah.edit',compact('rumah'));
     }
 
     /**
@@ -98,6 +98,24 @@ class rumahController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $rumah = rumah::find($id);
+        $rumah->ket= $request->a;
+        $rumah->agen_id=$request->b;
+        
+        if($request->hasFile('foto'))
+        {
+            $rumahs = $request->file('foto');
+            $extension=$rumahs->getClientOriginalExtension();
+            $filename=str_random(6).'.'.$extension;
+            $destinationPath=public_path().
+            DIRECTORY_SEPARATOR.'img';
+            $rumahs->move($destinationPath, $filename);
+            $rumah->foto=$filename;
+            
+        }
+        $rumah->save();
+        return redirect('/rumah/');
+
     }
 
     /**
@@ -109,5 +127,8 @@ class rumahController extends Controller
     public function destroy($id)
     {
         //
+        $rumah = rumah::findOrFail($id);
+        $rumah->delete();
+        return redirect('rumah');
     }
 }

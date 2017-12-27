@@ -6,28 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class rumah extends Model
 {
-    //
-    public static function boot()
-	{
-		parent::boot();
+	protected $table ='rumahs';
+    protected $fillable = ['ket','agen_id', 'foto'];
+    protected $visible = ['ket','agen_id', 'foto'];
+    public $timestamps = true;
 
-		self::updating(function($rumah)
-		{
-			if ($rumah->< $rumah->borrowed) {
-				Session::flash("flash_notification",[
-					"level"=>"danger",
-					"message"=>"Jumlah buku $rumah->ket harus >= ".$rumah->borrowed]);
-				return false;
-			}
-		});
-		self::deleting(function($rumah)
-		{
-			if ($rumah->borrowLogs()->count() > 0) {
-				Session::flash("flash_notification",[
-					"level"=>"danger",
-					"message"=>"Buku $rumah->ket sudah pernah dipinjam."]);
-				return false;
-			}
-		});
-	}
+    public function agens()
+    {
+    	return $this->belongsTo('App\agen');
+    }
 }

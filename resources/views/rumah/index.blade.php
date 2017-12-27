@@ -1,84 +1,60 @@
 @extends('layouts.app')
 
 @section('content')
-               <div id="wrapper">
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <center><h1>Data Rumah</h1></center>
+          <div class="panel ">
+                <div class="panel-heading bg-yellow">Data Rumah
+                <div class="panel-title pull-right"><a href="{{ route('rumah.create')}}">Tambah</a></div></div>
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{url('/home')}}">Admin</a>
-            </div>
-            <!-- Top Menu Items -->
-            <ul class="nav navbar-right top-nav">
-                
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Admin <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
+                <div class="panel-body">
+                <table class="table" col >
+                <thead>
+                	<tr>
+                		<th>Agen</th>
+                		<th>Keterangan</th>
+                		<th>Foto</th>
+                	
+                		<th colspan="2">Action</th>
+                	</tr>
+                </thead>
 
+                	<tbody>
+                		@foreach($rumah as $data)
+                		<tr>
+                            <td>{{$data->agen_id}}</td>
+                            <td>{{$data->ket}}</td>
+                            <td><img class="img-rounded" src="{{asset('/img/'.$data->foto)}}" height="100" width="100" ></td>
+                       
+                                
+                		
+                				<form action="{{route('rumah.destroy',$data->id)}}" method="post">
 
-                        <li class="divider"></li>
-                        <li>
-                            <a href="{{ url('/logout') }}" 
-                            onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                            </form>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <li class="active">
-                        <a href="{{url('/rumah')}}"><i class="fa fa-fw fa-dashboard"></i> Rumah</a>
-                    </li>
-                    <li>
-                        <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Agen</a>
-                    </li>
-                    <li>
-                        <a href="tables.html"><i class="fa fa-fw fa-table"></i>Admin</a>
-                    </li>
-                    
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </nav>
-
-        <div id="page-wrapper">
-
-            <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <a href="{{ url('/rumah/create')}}" class="btn btn-primary">Tambah Rumah</a>
-                        
-                    </div>
+                				<input name="_method" type="hidden" value="DELETE">
+                				<input name="_token" type="hidden">
+                				        
+                            <td>
+                                <a class="btn btn-warning" href="{{ route('rumah.edit',$data->id)}}"><i class="fa fa-edit"> Edit</i></a>
+                                <input class="btn btn-danger" type="submit" value="Delete">
+                                {{csrf_field()}}
+                                    </td>
+                                </form>
+                				
+                				@endforeach
+                			</td>
+                		</tr>
+                	</tbody>
+                </table>
+                	
                 </div>
-                <!-- /.row -->
 
+             
                 
-                <!-- /.row -->
-
-                
-                <!-- /.row -->
-
+                </div>
             </div>
-            <!-- /.container-fluid -->
-
+            </div>
         </div>
-        <!-- /#page-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
+    
 @endsection
-        

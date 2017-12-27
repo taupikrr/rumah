@@ -14,8 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/a', function () {
+    return view('layouts.admin');
+});
+Route::resource('rumah','RumahController');
 Auth::routes();
+
+Route::get('/tampilann','tampilanController@index');
 
 Route::get('/home', 'HomeController@index');
 Route::resource('/rumah','rumahController');
+Route::resource('/agen','agenController');

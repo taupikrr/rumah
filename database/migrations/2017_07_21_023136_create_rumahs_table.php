@@ -16,11 +16,11 @@ class CreateRumahsTable extends Migration
         Schema::create('rumahs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('ket');
-            $table->Integer('agen_id')->unsigned();
+            $table->string('agen_id');
             $table->string('foto')->nullable();
             $table->timestamps();
 
-            $table->foreign('agen_id')->references('id')->on('agens')->onUpdate('cascade')->onDelete('cascade');
+            // $table->foreign('agen_id')->references('id')->on('agens')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
