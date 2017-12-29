@@ -15,7 +15,13 @@ class CreateRumahsTable extends Migration
     {
         Schema::create('rumahs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('ket');
+            $table->string('tipe_rumah');
+            $table->integer('harga_rumah');
+            $table->string('luas_tunah');
+            $table->string('deskripsi');
+            $table->integer('jumlah_lantai');
+            $table->string('kamar_tidur');
+            $table->string('kamar_mandi');
             $table->string('agen_id');
             $table->string('foto')->nullable();
             $table->timestamps();
